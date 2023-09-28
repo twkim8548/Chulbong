@@ -3,6 +3,7 @@ export default defineNuxtConfig({
     devtools: {
         enabled: true
     },
+    css:['assets/css/tailwind.css'],
     runtimeConfig: {
         public: {
             firebaseApiKey: process.env.NUXT_FIREBASE_API_KEY,

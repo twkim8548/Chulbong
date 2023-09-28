@@ -15,8 +15,12 @@ export default {
         white: '#ffffff',
         gray: '#D9D9D9',
         gray2: '#B1B1B1',
-      }
+      },
     },
+    fontFamily: {
+      jalnan: ["Jalnan"],
+      score: ["SCoreDream"]
+    }
   },
   plugins: [],
 }

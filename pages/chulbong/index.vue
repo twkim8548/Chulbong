@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import IconLogo from "assets/icons/iconLogo.vue";
+
 const map = ref();
+
 onMounted(() => {
     kakao.maps.load(initMap)
     // initMap();
@@ -15,8 +18,9 @@ const initMap = () => {
 </script>
 
 <template>
-    <div class="w-full h-full">
-        <div id="map" class="w-full h-full" ref="map"/>
+    <div class="w-full h-full relative">
+        <div id="map" class="w-full h-full z-0" ref="map"/>
+        <icon-logo class="absolute top-[16px] left-[16px] cursor-pointer w-[71px]" @click="$router.push({name: 'chulbong'})"/>
     </div>
 </template>
 
