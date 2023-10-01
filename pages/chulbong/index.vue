@@ -17,9 +17,10 @@ let currentLatLng = {
     lng: 126.991511,
 };
 
-chulbongStore.selectChulbongs().then(() => {
-    setMarkers();
-});
+chulbongStore.selectChulbongs()
+    .then(() => {
+        setMarkers();
+    });
 
 const initMap = () => {
     let lat = 37.545409;
@@ -31,7 +32,7 @@ const initMap = () => {
     };
     map = new kakao.maps.Map(mapView.value, options);
 
-    kakao.maps.event.addListener(map, 'idle', function() {
+    kakao.maps.event.addListener(map, 'idle', function () {
         currentLatLng.lat = map.getCenter().getLat();
         currentLatLng.lng = map.getCenter().getLng();
     });
@@ -116,11 +117,14 @@ onMounted(() => {
         <icon-logo class="absolute top-[16px] left-[16px] cursor-pointer w-[71px]"
                    @click="$router.push({name: 'chulbong'})"/>
         <div class="absolute bottom-[18px] right-[17px] flex flex-col items-end gap-[15px]">
-            <img src="~/assets/icons/icon_help.svg" alt="current" class="w-[41px] h-[41px] drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)] cursor-pointer"/>
-            <img src="~/assets/icons/icon_current.svg" alt="current" class="w-[41px] h-[41px] drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)] cursor-pointer"
-                @click="moveCurrentPosition"/>
-            <img src="~/assets/icons/icon_plus.svg" alt="current" class="w-[71px] h-[71px] drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)] cursor-pointer"
-                @click="$router.push({name: 'chulbong-add-position', query: {lat: currentLatLng.lat, lng: currentLatLng.lng}})"/>
+            <img src="~/assets/icons/icon_help.svg" alt="current"
+                 class="w-[41px] h-[41px] drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)] cursor-pointer"/>
+            <img src="~/assets/icons/icon_current.svg" alt="current"
+                 class="w-[41px] h-[41px] drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)] cursor-pointer"
+                 @click="moveCurrentPosition"/>
+            <img src="~/assets/icons/icon_plus.svg" alt="current"
+                 class="w-[71px] h-[71px] drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)] cursor-pointer"
+                 @click="$router.push({name: 'chulbong-add-position', query: {lat: currentLatLng.lat, lng: currentLatLng.lng}})"/>
         </div>
         <detail-chulbong-modal
             :chulbong-id="selectedChulbongId"
