@@ -26,6 +26,12 @@ chulbongStore.selectChulbongs()
 const initMap = () => {
     let lat = 37.545409;
     let lng = 126.991511;
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            lat = position.coords.latitude;
+            lng = position.coords.longitude;
+        });
+    }
 
     const options = {
         center: new kakao.maps.LatLng(lat, lng),
@@ -37,7 +43,6 @@ const initMap = () => {
         currentLatLng.lat = map.getCenter().getLat();
         currentLatLng.lng = map.getCenter().getLng();
     });
-    moveCurrentPosition();
     setMarkers();
 }
 

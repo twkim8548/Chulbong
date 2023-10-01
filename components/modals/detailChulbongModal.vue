@@ -52,7 +52,7 @@ const insertComment = () => {
 <template>
     <default-modal @close="emit('close')">
         <template v-slot:body>
-            <div class="flex flex-col gap-[30px] overflow-auto scrollbar-hide p-[34px] w-[480px]">
+            <div class="flex flex-col gap-[30px] overflow-auto scrollbar-hide p-[34px] w-[480px] tablet:w-full tablet:p-[24px]">
                 <div class="flex justify-between w-full items-center">
                     <icon-close
                         class="cursor-pointer p-[5px] w-[30px] h-[30px]"
