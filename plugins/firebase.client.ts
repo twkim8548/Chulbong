@@ -2,7 +2,7 @@ import {initializeApp} from "firebase/app";
 import {getAnalytics} from "@firebase/analytics";
 import {getFirestore} from "@firebase/firestore";
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin(nuxtApp => {
     const config = useRuntimeConfig()
 
     const firebaseConfig = {
@@ -21,9 +21,11 @@ export default defineNuxtPlugin(() => {
     const firestore = getFirestore(app);
 
     return {
-        provide :{
-            firestore,
-            analytics
+        provide: {
+            firebase: {
+                firestore,
+                analytics
+            },
         }
     }
 });

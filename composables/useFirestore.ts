@@ -1,35 +1,61 @@
-import {collection, DocumentData, getDocs} from "@firebase/firestore";
-import {useNuxtApp} from "#app";
+import {DocumentData, getDoc, getDocs, updateDoc} from "@firebase/firestore";
 
 export const useFirestore = ()=> {
-
-    const getFirestoreData = async (collectionName: string) : Promise<(DocumentData & { id: string })[] | []> => {
-        const {firestore} = useNuxtApp();
-
-        let result: (DocumentData & { id: string })[] = [];
+    const selectFirestoreData = async (query: any) : Promise<(DocumentData)[] | []> => {
+        let result: (DocumentData)[] = [];
 
         try {
-            if (!collectionName) {
+            if (!query) {
                 throw new Error('Need CollectionName');
             }
 
-            const querySnapshot = await getDocs(collection(firestore, collectionName));
+            const querySnapshot = await getDocs(query);
             if (!querySnapshot.empty) {
-                result = querySnapshot.docs.map((doc) => ({
+                result = querySnapshot.docs.map((doc: any) => ({
                     id: doc.id,
                     ...doc.data(),
                 }));
             }
         } catch (err) {
             console.error(err);
-            throw new Error('Error get data');
         }
-
         return result;
+    }
+
+    const getFirebaseData = async (doc: any) => {
+        let result: any = {};
+
+        try {
+            if (!doc) {
+                throw new Error('Need doc');
+            }
+
+            const docSnapshot = await getDoc(doc);
+            if (docSnapshot.exists()) {
+                result = docSnapshot.data()
+            }
+        } catch (err) {
+            console.error(err);
+        }
+        return result;
+    }
+
+    const updateFirebaseData = async (doc: any, updateData: any) => {
+        try {
+            if (!doc) {
+                throw new Error('Need doc');
+            }
+
+            return await updateDoc(doc, updateData);
+        } catch (err) {
+            console.error(err);
+        }
     }
 
 
     return {
-        getFirestoreData
+        selectFirestoreData,
+        getFirebaseData,
+        updateFirebaseData,
     };
 };

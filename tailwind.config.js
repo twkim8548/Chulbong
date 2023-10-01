@@ -13,8 +13,9 @@ export default {
         primary: '#1F41BB',
         black: '#000000',
         white: '#ffffff',
-        gray: '#D9D9D9',
-        gray2: '#B1B1B1',
+        gray: '#EFEFEF',
+        gray2: '#D9D9D9',
+        gray3: '#B1B1B1',
       },
     },
     fontFamily: {
@@ -22,6 +23,8 @@ export default {
       score: ["SCoreDream"]
     }
   },
-  plugins: [],
+  plugins: [
+      require('tailwind-scrollbar-hide'),
+  ],
 }
 

@@ -1,9 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import {fileURLToPath} from "url";
+
 export default defineNuxtConfig({
     devtools: {
         enabled: true
     },
     css:['assets/css/tailwind.css'],
+    alias: {
+        "@" : "/<rootDir>",
+        "images": fileURLToPath(new URL('./assets/images', import.meta.url)),
+        "icons": fileURLToPath(new URL('./assets/icons', import.meta.url)),
+    },
     runtimeConfig: {
         public: {
             firebaseApiKey: process.env.NUXT_FIREBASE_API_KEY,
@@ -19,11 +26,12 @@ export default defineNuxtConfig({
     app: {
         head: {
             script: [{
-                src: `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${process.env.NUXT_KAKAO_APP_KEY}`
+                src: `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&libraries=services&appkey=${process.env.NUXT_KAKAO_APP_KEY}`
             }],
         },
     },
     modules: [
-        '@nuxtjs/tailwindcss'
+        '@nuxtjs/tailwindcss',
+        '@pinia/nuxt'
     ],
 })
