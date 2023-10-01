@@ -1,4 +1,4 @@
-import {DocumentData, getDoc, getDocs, updateDoc} from "@firebase/firestore";
+import {addDoc, DocumentData, getDoc, getDocs, updateDoc} from "@firebase/firestore";
 
 export const useFirestore = ()=> {
     const selectFirestoreData = async (query: any) : Promise<(DocumentData)[] | []> => {
@@ -52,10 +52,23 @@ export const useFirestore = ()=> {
         }
     }
 
+    const insertFirebaseData = async (doc: any, insertData: any) => {
+        try {
+            if (!doc) {
+                throw new Error('Need doc');
+            }
+
+            return await addDoc(doc, insertData);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
 
     return {
         selectFirestoreData,
         getFirebaseData,
         updateFirebaseData,
+        insertFirebaseData,
     };
 };

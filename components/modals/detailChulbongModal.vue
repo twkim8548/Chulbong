@@ -4,6 +4,7 @@ import {getDateFormat} from "~/composables/useDate";
 import {useChulbongStore} from "~/stores/chulbong";
 import IconClose from "icons/iconClose.vue";
 import ReportModal from "~/components/modals/reportModal.vue";
+import {useCommentStore} from "~/stores/comment";
 
 const emit = defineEmits(['close', 'report']);
 const props = defineProps({
@@ -14,12 +15,13 @@ const props = defineProps({
 });
 
 const chulbongStore = useChulbongStore();
+const commentStore = useCommentStore();
 
 chulbongStore.getChulbong(props.chulbongId);
-chulbongStore.selectChulbongComments(props.chulbongId);
+commentStore.selectChulbongComments(props.chulbongId);
 
 const chulbong = computed(() => chulbongStore.chulbong);
-const comments = computed(() => chulbongStore.comments);
+const comments = computed(() => commentStore.comments);
 const reDescription = computed(() => chulbong?.value?.description?.split("\\n"));
 
 const newComment = ref("");
@@ -36,6 +38,13 @@ const closeReportModal = () => {
 const report = () => {
     emit('report', props.chulbongId);
     isShowReportModal.value = false;
+}
+
+const insertComment = () => {
+    commentStore.insertComment(props.chulbongId, {
+        content: newComment.value,
+        createdAt: new Date(),
+    })
 }
 
 </script>
@@ -67,7 +76,7 @@ const report = () => {
                         간략한 설명
                     </p>
                     <p class="text-black text-[20px] font-[700]">
-                        <template v-for="(c, index) in reDescription">
+                        <template v-for="(c) in reDescription">
                             {{ c }} <br>
                         </template>
                     </p>
@@ -101,8 +110,9 @@ const report = () => {
                             <input type="text" class="flex-1 border rounded-[10px] border-gray3 px-[10px] text-[15px]"
                                    v-model="newComment"
                                    placeholder="댓글을 입력해보세요"/>
-                            <div class="px-[20px] py-[10px] curcor-pointer"
-                                 :class="newComment.length > 0 ? 'text-black' : 'text-gray2'">
+                            <div class="px-[20px] py-[10px]"
+                                 :class="newComment.length > 0 ? 'text-black cursor-pointer' : 'text-gray2 cursor-default'"
+                                @click="insertComment">
                                 등록
                             </div>
                         </div>

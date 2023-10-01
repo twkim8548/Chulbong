@@ -55,7 +55,14 @@
 }
 
 @layer base {
+    :root{
+        --vh: 100%;
+    }
     html {
         font-family: 'ScoreDream', system-ui, sans-serif;
+    }
+    body {
+        height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);
     }
 }

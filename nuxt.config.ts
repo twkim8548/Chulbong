@@ -5,9 +5,9 @@ export default defineNuxtConfig({
     devtools: {
         enabled: true
     },
-    css:['assets/css/tailwind.css'],
+    css: ['assets/css/tailwind.css'],
     alias: {
-        "@" : "/<rootDir>",
+        "@": "/<rootDir>",
         "images": fileURLToPath(new URL('./assets/images', import.meta.url)),
         "icons": fileURLToPath(new URL('./assets/icons', import.meta.url)),
     },
@@ -25,9 +25,12 @@ export default defineNuxtConfig({
     },
     app: {
         head: {
-            script: [{
-                src: `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&libraries=services&appkey=${process.env.NUXT_KAKAO_APP_KEY}`
-            }],
+            viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0',
+            script: [
+                {
+                    src: `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&libraries=services&appkey=${process.env.NUXT_KAKAO_APP_KEY}`
+                },
+            ],
         },
     },
     modules: [
