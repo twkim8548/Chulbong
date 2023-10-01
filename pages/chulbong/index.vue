@@ -3,6 +3,7 @@ import IconLogo from "assets/icons/iconLogo.vue";
 import {useChulbongStore} from "~/stores/chulbong";
 import DetailChulbongModal from "~/components/modals/detailChulbongModal.vue";
 import {Chulbong} from "~/types/chulbong";
+import pinImg from "~/assets/icons/icon_pin.svg"
 
 const chulbongStore = useChulbongStore()
 const chulbongs = computed(() => chulbongStore.chulbongs);
@@ -60,7 +61,7 @@ const setMarkers = () => {
     markers = [];
 
     chulbongs.value.forEach(chulbong => {
-        const imageSrc = '_nuxt/assets/icons/icon_pin.svg',
+        const imageSrc = pinImg,
             imageSize = new kakao.maps.Size(50, 50),
             imageOption = {offset: new kakao.maps.Point(25, 30)};
 
