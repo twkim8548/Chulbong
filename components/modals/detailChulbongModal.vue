@@ -2,7 +2,6 @@
 import DefaultModal from "~/components/modals/defaultModal.vue";
 import {getDateFormat} from "~/composables/useDate";
 import {useChulbongStore} from "~/stores/chulbong";
-import IconClose from "icons/iconClose.vue";
 import ReportModal from "~/components/modals/reportModal.vue";
 import {useCommentStore} from "~/stores/comment";
 
@@ -54,9 +53,11 @@ const insertComment = () => {
         <template v-slot:body>
             <div class="flex flex-col gap-[30px] overflow-auto scrollbar-hide p-[34px] w-[480px] tablet:w-full tablet:p-[24px]">
                 <div class="flex justify-between w-full items-center">
-                    <icon-close
+                    <img
+                        src="~/assets/icons/icon_close.svg"
                         class="cursor-pointer p-[5px] w-[30px] h-[30px]"
                         @click="emit('close')"
+                        alt="close"
                     />
                     <button class="cursor-pointer"
                             @click="showReportModal">

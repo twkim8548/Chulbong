@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import IconLogo from "assets/icons/iconLogo.vue";
 import {useChulbongStore} from "~/stores/chulbong";
 import DetailChulbongModal from "~/components/modals/detailChulbongModal.vue";
 import {Chulbong} from "~/types/chulbong";
 import pinImg from "~/assets/icons/icon_pin.svg"
+import HelpModal from "~/components/modals/helpModal.vue";
 
 const chulbongStore = useChulbongStore()
 const chulbongs = computed(() => chulbongStore.chulbongs);
 const mapView = ref();
 const isShowDetailChulbongModal = ref(false);
+const isShowHelpModal = ref(false);
 
 let markers: any[] = [];
 let selectedChulbongId: string = "";
@@ -120,11 +121,14 @@ onMounted(() => {
 <template>
     <div>
         <div class="w-full h-full z-0" ref="mapView"/>
-        <icon-logo class="absolute top-[16px] left-[16px] cursor-pointer w-[71px]"
-                   @click="$router.push({name: 'chulbong'})"/>
+        <img src="~/assets/icons/icon_logo.svg"
+             class="absolute top-[16px] left-[16px] w-[71px]"
+             @click="$router.push({name: 'chulbong'})"
+             alt="logo"/>
         <div class="absolute bottom-[18px] right-[17px] flex flex-col items-end gap-[15px]">
             <img src="~/assets/icons/icon_help.svg" alt="current"
-                 class="w-[41px] h-[41px] drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)] cursor-pointer"/>
+                 class="w-[41px] h-[41px] drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)] cursor-pointer"
+                 @click="isShowHelpModal = true"/>
             <img src="~/assets/icons/icon_current.svg" alt="current"
                  class="w-[41px] h-[41px] drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)] cursor-pointer"
                  @click="moveCurrentPosition"/>
@@ -137,6 +141,9 @@ onMounted(() => {
             v-if="isShowDetailChulbongModal"
             @close="closeDeatilChulbongModal"
             @report="checkChulbong"/>
+        <help-modal
+            v-if="isShowHelpModal"
+            @close="isShowHelpModal = false"/>
     </div>
 </template>
 

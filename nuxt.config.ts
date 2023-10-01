@@ -35,6 +35,28 @@ export default defineNuxtConfig({
     },
     modules: [
         '@nuxtjs/tailwindcss',
-        '@pinia/nuxt'
+        '@pinia/nuxt',
+        '@vite-pwa/nuxt',
     ],
+    pwa: {
+        manifest: {
+            name: '봉철아 근육먹자',
+            short_name: '봉철',
+            description: '우리동네 철봉찾기 프로젝트',
+            icons: [
+                {
+                    src: "icons/icon_logo.svg",
+                    sizes: "142x64",
+                    type: "image/svg"
+                }
+            ],
+        },
+        workbox: {
+            navigateFallback: "/",
+        },
+        devOptions: {
+            enabled: true,
+            type: 'module',
+        }
+    }
 })
