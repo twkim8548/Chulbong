@@ -25,6 +25,7 @@ export default defineNuxtConfig({
     },
     app: {
         head: {
+            title: "봉철아~ 근육먹자~",
             htmlAttrs: {
                 lang: 'ko'
             },
