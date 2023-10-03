@@ -32,8 +32,8 @@ const changeImageInput = (e) => {
     if (e.target?.files.length > 0) {
 
     }
-  imageFile = e.target.files[0];
-  imageFileUrl.value = URL.createObjectURL(imageFile);
+    imageFile = e.target.files[0];
+    imageFileUrl.value = URL.createObjectURL(imageFile);
 }
 
 const insertChulbong = async () => {
@@ -83,7 +83,7 @@ onMounted(() => {
                 제보하기
             </p>
             <img src="~/assets/icons/icon_back.svg" alt="back" class="absolute top-[17px] left-[16px] cursor-pointer"
-                 @click="$router.go(-1)"/>
+                 @click="$router.replace({name: 'chulbong-add-position', query: {lat: route.query.lat, lng: route.query.lng}})"/>
         </header>
         <main class="flex flex-col gap-[30px] px-[16px] max-w-[450px] self-center w-full pb-[30px]">
             <div class="flex flex-col gap-[7px]">
@@ -109,14 +109,15 @@ onMounted(() => {
                 </p>
                 <input type="file" accept="image/*" hidden id="imageInput"
                        ref="imageInput"
-                  @change="changeImageInput">
+                       @change="changeImageInput">
                 <label for="imageInput"
                        v-if="!imageFileUrl"
                        class="h-[300px] border border-gray3 rounded-[20px] flex items-center justify-center text-[15px] font-[700] cursor-pointer">
                     사진 등록
                 </label>
                 <img v-else :src="imageFileUrl" alt="preview"
-                    class="h-[300px] border border-gray3 rounded-[20px] object-contain cursor-pointer" @click="imageInput.click()"/>
+                     class="h-[300px] border border-gray3 rounded-[20px] object-contain cursor-pointer"
+                     @click="imageInput.click()"/>
             </div>
             <div class="flex flex-col gap-[7px]">
                 <p class="text-gray3 text-[15px]">
@@ -131,7 +132,7 @@ onMounted(() => {
             </p>
             <div class="font-[700] text-[20px] self-center"
                  :class="description.length > 0 ? 'text-primary cursor-pointer' : 'text-gray2 cursor-default'"
-                @click="insertChulbong">
+                 @click="insertChulbong">
                 완료
             </div>
         </main>

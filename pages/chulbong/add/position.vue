@@ -3,10 +3,10 @@ const route = useRoute();
 
 const mapView = ref();
 let map: any = null;
-let currentLatLng = {
+let currentLatLng = ref({
     lat: Number(route.query?.lat ?? "37.545409"),
     lng: Number(route.query?.lng ?? "126.991511"),
-}
+})
 
 
 const initMap = () => {
@@ -17,8 +17,8 @@ const initMap = () => {
     map = new kakao.maps.Map(mapView.value, options);
 
     kakao.maps.event.addListener(map, 'idle', function () {
-        currentLatLng.lat = map.getCenter().getLat();
-        currentLatLng.lng = map.getCenter().getLng();
+        currentLatLng.value.lat = map.getCenter().getLat();
+        currentLatLng.value.lng = map.getCenter().getLng();
     });
 }
 
@@ -51,9 +51,10 @@ onMounted(() => {
             <p class="text-[15px] font-[700] text-gray3">
                 지도를 움직여 철봉이 있는 위치를<br class="hidden tablet:block" />
                 가운데 핀이 향하도록 설정해주세요.
+                {{currentLatLng}}
             </p>
             <img src="~/assets/icons/icon_back.svg" alt="back" class="absolute top-[17px] left-[16px] cursor-pointer"
-                 @click="$router.replace({name: 'index', query: {lat: currentLatLng.lat, lng: currentLatLng.lng}})"/>
+                 @click="$router.replace({name: 'index', query: {lat: $route.query.lat, lng: $route.query.lng}})"/>
         </header>
         <img src="~/assets/icons/icon_pin.svg" alt="pin"
              class="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"/>

@@ -114,7 +114,8 @@ const checkChulbong = (chulbongId: string) => {
 }
 
 onMounted(() => {
-    kakao.maps.load(initMap)
+    kakao.maps.load(initMap);
+    useNuxtApp().$pwa.install();
 })
 </script>
 
