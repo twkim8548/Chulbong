@@ -58,7 +58,7 @@ const insertChulbong = async () => {
         images: images,
     }).then(() => {
         loadingStore.hideLoading();
-        router.replace({name: 'index'});
+        router.replace({name: 'chulbong', query: {lat: route.query.lat, lng: route.query.lng}});
     }).catch(err => {
         loadingStore.hideLoading();
         console.error(err);
