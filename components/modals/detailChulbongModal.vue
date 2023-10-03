@@ -51,7 +51,7 @@ const insertComment = () => {
 <template>
     <default-modal @close="emit('close')">
         <template v-slot:body>
-            <div class="flex flex-col gap-[30px] overflow-auto scrollbar-hide p-[34px] w-[480px] tablet:w-full tablet:p-[24px]">
+            <div class="flex flex-col gap-[30px] overflow-auto scrollbar-hide p-[34px] w-[480px] tablet:w-full tablet:p-[24px] tablet:h-screen">
                 <div class="flex justify-between w-full items-center">
                     <img
                         src="~/assets/icons/icon_close.svg"
@@ -107,11 +107,11 @@ const insertComment = () => {
                                 {{ comments?.length ?? 0 }}
                             </p>
                         </div>
-                        <div class="flex">
-                            <input type="text" class="flex-1 border rounded-[10px] border-gray3 px-[10px] text-[15px]"
+                        <div class="flex w-full">
+                            <input type="text" class="flex-1 w-full border rounded-[10px] border-gray3 px-[10px] text-[15px]"
                                    v-model="newComment"
                                    placeholder="댓글을 입력해보세요"/>
-                            <div class="px-[20px] py-[10px]"
+                            <div class="px-[20px] py-[10px] shrink-0"
                                  :class="newComment.length > 0 ? 'text-black cursor-pointer' : 'text-gray2 cursor-default'"
                                 @click="insertComment">
                                 등록

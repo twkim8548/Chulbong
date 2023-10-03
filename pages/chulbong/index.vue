@@ -4,6 +4,7 @@ import DetailChulbongModal from "~/components/modals/detailChulbongModal.vue";
 import {Chulbong} from "~/types/chulbong";
 import pinImg from "~/assets/icons/icon_pin.svg"
 import HelpModal from "~/components/modals/helpModal.vue";
+const route = useRoute();
 
 const chulbongStore = useChulbongStore()
 const chulbongs = computed(() => chulbongStore.chulbongs);
@@ -25,8 +26,8 @@ chulbongStore.selectChulbongs()
     });
 
 const initMap = () => {
-    let lat = 37.545409;
-    let lng = 126.991511;
+    let lat = route.query?.lat ?? 37.545409;
+    let lng = route.query?.lng ?? 126.991511;
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
             lat = position.coords.latitude;
@@ -115,7 +116,6 @@ const checkChulbong = (chulbongId: string) => {
 
 onMounted(() => {
     kakao.maps.load(initMap);
-    useNuxtApp().$pwa.install();
 })
 </script>
 

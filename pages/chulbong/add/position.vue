@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const route = useRoute();
+const router = useRouter();
 
 const mapView = ref();
 let map: any = null;
@@ -12,7 +13,7 @@ let currentLatLng = ref({
 const initMap = () => {
     const options = {
         center: new kakao.maps.LatLng(route.query?.lat, route.query?.lng ?? 126.991511),
-        level: 0
+        level: 5
     };
     map = new kakao.maps.Map(mapView.value, options);
 
@@ -51,16 +52,15 @@ onMounted(() => {
             <p class="text-[15px] font-[700] text-gray3">
                 지도를 움직여 철봉이 있는 위치를<br class="hidden tablet:block" />
                 가운데 핀이 향하도록 설정해주세요.
-                {{currentLatLng}}
             </p>
             <img src="~/assets/icons/icon_back.svg" alt="back" class="absolute top-[17px] left-[16px] cursor-pointer"
-                 @click="$router.replace({name: 'index', query: {lat: $route.query.lat, lng: $route.query.lng}})"/>
+                 @click="router.replace({name: 'chulbong', query: {lat: currentLatLng.lat, lng: currentLatLng.lng}})"/>
         </header>
         <img src="~/assets/icons/icon_pin.svg" alt="pin"
              class="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"/>
         <div
             class="cursor-pointer px-[34px] py-[13px] text-[20px] font-[700] absolute bottom-[45px] left-[50%] translate-x-[-50%] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] bg-white rounded-full text-primary"
-            @click="$router.push({name: 'chulbong-add-detail', query : {lat: currentLatLng.lat, lng: currentLatLng.lng}})">
+            @click="router.push({name: 'chulbong-add-detail', query : {lat: currentLatLng.lat, lng: currentLatLng.lng}})">
             다음
         </div>
         <img src="~/assets/icons/icon_current.svg" alt="current"
