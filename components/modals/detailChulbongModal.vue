@@ -82,7 +82,7 @@ const insertComment = () => {
                         </template>
                     </p>
                 </div>
-                <div class="flex flex-col gap-[7px]">
+                <div class="flex flex-col gap-[7px]" v-if="chulbong?.images?.length > 0">
                     <p class="text-gray3 text-[15px]">
                         사진
                     </p>
